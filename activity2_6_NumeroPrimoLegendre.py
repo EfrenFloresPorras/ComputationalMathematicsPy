@@ -17,8 +17,6 @@ def es_primo(n):
 
 # Función para calcular el símbolo de Legendre (a/p)
 def legendre(a, p):
-    if p <= 1 or not es_primo(p):
-        raise ValueError("p debe ser un número primo mayor que 1")
     if a % p == 0:
         return 0
     if pow(a, (p - 1) // 2, p) == p - 1:
@@ -26,9 +24,28 @@ def legendre(a, p):
     else:
         return 1
 
+# Function that calculates the quantity of prime numbers that are less than a given number
+# without the use of negative Legendre's symbol
+# Using Legendre's theorem
+def cantidad_primos_menores_que(n):
+    if n < 2:
+        return 0
+    if n == 2:
+        return 1
+    if n == 3:
+        return 2
+    cantidad = 2
+    for i in range(5, n + 1, 2):
+        if es_primo(i):
+            cantidad += 1
+    return cantidad
+
+# Example of use of the function
 # Ejemplo de uso de las funciones
-numero = 29
+n = 214
+numero = 214
 print(f"¿El número {numero} es primo? {'Sí' if es_primo(numero) else 'No'}")
+print(f"La cantidad de números primos menores que {n} es {cantidad_primos_menores_que(n)}")
 
 a = 5
 p = 11
